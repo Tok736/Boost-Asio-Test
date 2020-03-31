@@ -34,7 +34,7 @@ script:
   - export C=/usr/bin/gcc-7
   - mkdir -p build
   - cd build
-  - cmake ..
+  - cmake .. -DCOVERALLS=ON
   - make
   - ctest --output-on-failure
   - valgrind --tool=memcheck --leak-check=full --leak-resolution=med ./test/runTest
