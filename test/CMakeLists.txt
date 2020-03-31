@@ -7,7 +7,7 @@ include_directories(../include)
 
 file(GLOB_RECURSE SOURCE "../src/*.cpp")
 file(GLOB_RECURSE TEST_CPPS "*/*.cpp")
-add_executable(runTest test.cpp ${TEST_CPPS})
+add_executable(runTest test.cpp ${SOURCE} ${TEST_CPPS})
 
 # TODO add lib to further test
 target_link_libraries(runTest gtest gtest_main)
