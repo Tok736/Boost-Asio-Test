@@ -30,6 +30,7 @@ before_install:
   - pip install --user cpp-coveralls
 
 script:
+  - ./configure --enable-gcov && make && make check
   - export CXX=/usr/bin/g++-7
   - export C=/usr/bin/gcc-7
   - mkdir -p build
