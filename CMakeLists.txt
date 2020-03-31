@@ -6,8 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS  "-lm -Wno-unknown-pragmas -Wall -Wextra -Werror -fprofile-arcs -ftest-coverage -lgcov")
 set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
 
-find_package(GTest REQUIRED)
-
 include_directories(include)
 
 file(GLOB_RECURSE SOURCE "src/*.c")
