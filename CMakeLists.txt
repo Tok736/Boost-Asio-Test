@@ -8,7 +8,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
 
 include_directories(include)
 
-file(GLOB_RECURSE SOURCE "src/*.c")
+file(GLOB_RECURSE SOURCE "src/*.cpp")
 add_executable(${PROJECT_NAME} main.cpp ${SOURCE})
 
 # ==== Need for debugging tests ==== #
