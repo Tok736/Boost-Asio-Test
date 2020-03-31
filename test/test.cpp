@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "sum.h"
 
 int main(int argc, char *argv[])
 {
@@ -7,5 +8,5 @@ int main(int argc, char *argv[])
 }
 
 TEST(test, small) {
-    EXPECT_EQ(4,4);
+    EXPECT_EQ(sum(2, 7),9);
 }
