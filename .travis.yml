@@ -38,7 +38,7 @@ script:
   - make
   - ctest --output-on-failure
   - valgrind --tool=memcheck --leak-check=full --leak-resolution=med ./test/runTest
-  - cppcheck --enable=all --std=cpp14 --check-config --suppress=missingIncludeSystem -I ../include ../src
+  - cppcheck --enable=all --check-config --suppress=missingIncludeSystem -I ../include ../src
 
 after_success:
   - echo "SUCCESS"
