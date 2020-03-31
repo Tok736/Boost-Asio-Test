@@ -5,7 +5,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 include_directories(../include)
 
 
-file(GLOB_RECURSE SOURCE "../src/*.c")
+file(GLOB_RECURSE SOURCE "../src/*.cpp")
 file(GLOB_RECURSE TEST_CPPS "*/*.cpp")
 add_executable(runTest test.cpp ${TEST_CPPS})
 
