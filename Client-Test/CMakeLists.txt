@@ -26,20 +26,3 @@ target_link_libraries(${PROJECT_NAME} m)
 find_package(Boost REQUIRED COMPONENTS system filesystem date_time regex thread)
 include_directories(${Boost_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
-
-# ==== Linking with Google test ==== #
-enable_testing()
-
-add_subdirectory(googletest)
-add_subdirectory(test)
-#include googletest/include dir
-include_directories(googletest/googletest/include)
-
-#include the googlemock/include dir
-include_directories(googletest/googlemock/include)
-
-#Link with GoogleTest
-target_link_libraries(${PROJECT_NAME} gtest gtest_main)
-
-#Link with GoogleMock
-target_link_libraries(${PROJECT_NAME} gmock gmock_main)
