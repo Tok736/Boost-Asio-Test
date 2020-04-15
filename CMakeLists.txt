@@ -20,8 +20,6 @@ add_executable(${PROJECT_NAME} main.cpp ${SOURCE})
 target_link_libraries(${PROJECT_NAME} m)
 
 # ==== Linking with Boost ==== #
-#set(Boost_USE_STATIC_LIBS ON)
-#set(Boost_USE_MULTITHREADED ON)
 
 find_package(Boost REQUIRED COMPONENTS system filesystem date_time regex thread)
 include_directories(${Boost_INCLUDE_DIRS})
