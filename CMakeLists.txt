@@ -11,7 +11,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
 include_directories(include)
 
 file(GLOB_RECURSE SOURCE "src/*.cpp")
-add_executable(${PROJECT_NAME} main.cpp ${SOURCE})
+add_executable(${PROJECT_NAME} main.cpp ${SOURCE} include/ThreadSafeQueue.h)
 
 # ==== Need for debugging tests ==== #
 #file(GLOB_RECURSE TEST_CPPS "test/*/*.cpp")

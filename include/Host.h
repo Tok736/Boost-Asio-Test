@@ -1,41 +1,60 @@
-#ifndef BOOST_ASIO_TEST_HOST_H
-#define BOOST_ASIO_TEST_HOST_H
-
 #include <cstdlib>
 #include <iostream>
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
+#include <map>
+#include <memory>
+#include <thread>
+#include <utility>
 
 #include "ServerSession.h"
 
-//using boost::asio::ip::tcp;
-//
-//class server {
-//private:
-//    boost::asio::io_context& io_context_;
-//    tcp::acceptor acceptor_;
-//
-//    void start_accept() {
-//        session* new_session = new session(io_context_);
-//        acceptor_.async_accept(new_session->socket(),
-//                               boost::bind(&server::handle_accept, this, new_session,
-//                                           boost::asio::placeholders::error));
-//    }
-//    void handle_accept(session* new_session, const boost::system::error_code& error) {
-//        if (!error) {
-//            new_session->start();
-//        }
-//        else {
-//            delete new_session;
-//        }
-//
-//        start_accept();
-//    }
-//public:
-//    server(boost::asio::io_context& io_context, short port) : io_context_(io_context), acceptor_(io_context, tcp::endpoint(tcp::v4(), port))
-//    {
-//        start_accept();
-//    }
-//};
 
-#endif //BOOST_ASIO_TEST_HOST_H
+using boost::asio::ip::tcp;
+
+class Server {
+private:
+    typedef boost::system::error_code errorCode;
+    typedef std::shared_ptr<Session> sessionPtr;
+
+    std::map<std::string, sessionPtr> sessions;
+    sessionPtr testSession;
+    std::shared_ptr<boost::asio::io_context> context;
+    std::shared_ptr<tcp::acceptor> acceptor;
+
+    void startAccept() {
+        sessionPtr newSession = std::make_shared<Session>(*context);
+        acceptor->async_accept(newSession->socket(),
+                               [newSession, this](const boost::system::error_code& error) {
+                                   handleAccept(newSession, error);
+        });
+    }
+    void handleAccept(sessionPtr newSession, const errorCode& error) {
+        if (!error) {
+            testSession = std::move(newSession);
+//            sessions.emplace("Player", temp);
+            testSession->run();
+//            sessions["Player"]->run();
+            startAccept();
+        }
+        else {
+
+        }
+    }
+public:
+    Server(short port) {
+        context = std::make_shared<boost::asio::io_context>();
+        acceptor = std::make_shared<tcp::acceptor>(*context, tcp::endpoint(tcp::v4(), port));
+    }
+    void run() {
+        startAccept();
+        std::thread thread([this]() {
+            this->context->run();
+        });
+        thread.detach();
+    }
+    void stop() {
+        context->stop();
+    }
+};
+

@@ -1,0 +1,8 @@
+# !/bin/bash
+
+echo "Hello"
+mkdir build
+cd build
+cmake ..
+make
+./Boost-Asio-Test

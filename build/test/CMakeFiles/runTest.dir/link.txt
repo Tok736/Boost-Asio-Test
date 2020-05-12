@@ -1,0 +1,1 @@
+/usr/bin/c++  -lm -Wno-unknown-pragmas -Wall -Wextra -Werror -fprofile-arcs -ftest-coverage -lgcov  -lgcov --coverage CMakeFiles/runTest.dir/test.cpp.o CMakeFiles/runTest.dir/__/src/client.cpp.o CMakeFiles/runTest.dir/__/src/server.cpp.o  -o runTest  ../lib/libgtest.a ../lib/libgtest_main.a ../lib/libgtest.a -lpthread 
